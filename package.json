@@ -1,0 +1,22 @@
+{
+  "name": "project-check",
+  "version": "0.1.0",
+  "description": "Simple Node.js test script to evaluate repository structure, code quality, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmosbach/project-check.git"
+  },
+  "author": "pmosbach",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pmosbach/project-check/issues"
+  },
+  "homepage": "https://github.com/pmosbach/project-check#readme",
+  "dependencies": {
+    "jest": "^23.5.0"
+  }
+}
