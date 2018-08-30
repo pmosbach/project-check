@@ -3,10 +3,12 @@
 // Dependencies
 
 // NPM-installed dependencies
-var glob = require("glob");
+const glob = require("glob");
+const commitCount = require("git-commit-count");
 
 // Built-in Node dependencies
-var fs = require("fs");
+const fs = require("fs");
+const path = require("path");
 
 //--------------------------------------------------------------------------------------------------
 // Constants
@@ -14,6 +16,8 @@ var fs = require("fs");
 
 //--------------------------------------------------------------------------------------------------
 // Tests
+
+// Resolve the path of the repo to be tested
 
 describe('The Repo - README and dotfiles', () => {
     test('should contain a README', () => {
@@ -27,5 +31,17 @@ describe('The Repo - README and dotfiles', () => {
 
     test('should contain a GitLab CI file (.gitlab-ci.yml)', () => {
         expect(fs.existsSync('.gitlab-ci.yml')).toBeTruthy();
+    })
+})
+
+describe('The Repo - Directory Structure', () => {
+    test('should have a documentation folder', () => {
+
+    })
+})
+
+describe('The Repo - Git Basics', () => {
+    test('should have more than one commit in the git history', () => {
+        expect(commitCount()).toBeGreaterThan(1);
     })
 })
