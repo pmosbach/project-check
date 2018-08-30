@@ -21,8 +21,8 @@ const path = require("path");
 
 describe('The Repo - README and dotfiles', () => {
     test('should contain a README', () => {
-        // TODO turn into a regex using glob
-        expect(fs.existsSync('README.md')).toBeTruthy();
+        // TODO add the case insensitive option to make this less hacky
+        expect(glob.sync("[Rr][Ee][Aa][Dd][Mm][Ee]?(\.md|\.txt|\.rst)")).not.toHaveLength(0);
     })
 
     test('should contain a .gitignore file', () => {
