@@ -17,11 +17,11 @@ const path = require("path");
 //--------------------------------------------------------------------------------------------------
 // Tests
 
-// Resolve the path of the repo to be tested
+// TODO resolve the path of the repo to be tested
 
 describe('The Repo - README and dotfiles', () => {
     test('should contain a README', () => {
-        // TODO add the case insensitive option to make this less hacky
+        // TODO add the case insensitive option to make this less ugly
         expect(glob.sync("[Rr][Ee][Aa][Dd][Mm][Ee]?(\.md|\.txt|\.rst)")).not.toHaveLength(0);
     })
 
@@ -36,7 +36,11 @@ describe('The Repo - README and dotfiles', () => {
 
 describe('The Repo - Directory Structure', () => {
     test('should have a documentation folder', () => {
+        expect(glob.sync("(doc/|docs/|Documents/|Documentation/)")).not.toHaveLength(0);
+    })
 
+    test('should not have a releases folder', () => {
+        expect(glob.sync("[Rr]elease?(s)/")).toHaveLength(0);
     })
 })
 
