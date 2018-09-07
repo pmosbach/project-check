@@ -2,12 +2,17 @@ FROM node:carbon-alpine
 
 LABEL org.label-schema.vcs-url="https://github.com/pmosbach/project-check"
 
-RUN npm install -g jest jest-html-reporter glob git-commit-count
+RUN npm install -g jest && \
+    mkdir /jest
 
 WORKDIR /jest
 
-COPY repostructure.test.js jest.config.json ./
+COPY repostructure.test.js jest.config.json package.json package-lock.json /jest/
+
+RUN npm install
+
+RUN ls -al /jest
 
 # This is intended to be a sane fallback, but you should override this via your .gitlab-ci.yml
-CMD ["/jest/*.js","--config","/jest/jest.config.json",]
+CMD ["--config","/jest/jest.config.json","/jest/"]
 ENTRYPOINT ["jest"]
