@@ -11,8 +11,6 @@ COPY repostructure.test.js jest.config.json package.json package-lock.json /jest
 
 RUN npm install
 
-RUN ls -al /jest
-
 # This is intended to be a sane fallback, but you should override this via your .gitlab-ci.yml
 CMD ["--config","/jest/jest.config.json","/jest/"]
 ENTRYPOINT ["jest"]
