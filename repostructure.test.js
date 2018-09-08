@@ -1,5 +1,5 @@
 "use strict";
-//------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Dependencies
 
 // NPM-installed dependencies
@@ -39,6 +39,10 @@ describe('The Repo - Directory Structure', () => {
         expect(glob.sync("(doc/|docs/|Documents/|Documentation/)")).not.toHaveLength(0);
     })
 
+    /*test('should have a documentation folder that is not empty', () => {
+        
+    })*/
+
     test('should not have a releases folder', () => {
         expect(glob.sync("[Rr]elease?(s)/")).toHaveLength(0);
     })
@@ -46,6 +50,10 @@ describe('The Repo - Directory Structure', () => {
 
 describe('The Repo - Git Basics', () => {
     test('should have more than one commit in the git history', () => {
-        expect(commitCount()).toBeGreaterThan(1);
+        expect(commitCount(process.env.PWD)).toBeGreaterThan(1);
     })
 })
+
+console.log(process.cwd())
+console.log(__dirname)
+console.log(process.env.PWD)
