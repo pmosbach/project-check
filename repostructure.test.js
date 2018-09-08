@@ -54,6 +54,7 @@ describe('The Repo - Git Basics', () => {
     })
 })
 
-console.log(process.cwd())
-console.log(__dirname)
-console.log(process.env.PWD)
+console.log("CWD: " + process.cwd());
+console.log("__dirname: " + __dirname);
+console.log("PWD: " + process.env.PWD);
+console.log("Commits: " + commitCount());
