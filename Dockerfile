@@ -2,7 +2,8 @@ FROM node:carbon-alpine
 
 LABEL org.label-schema.vcs-url="https://github.com/pmosbach/project-check"
 
-RUN npm install -g jest && \
+RUN apk add --no-cache git && \
+    npm install -g jest && \
     mkdir /jest
 
 WORKDIR /jest
