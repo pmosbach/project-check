@@ -50,11 +50,11 @@ describe('The Repo - Directory Structure', () => {
 
 describe('The Repo - Git Basics', () => {
     test('should have more than one commit in the git history', () => {
-        expect(commitCount(process.env.PWD)).toBeGreaterThan(1);
+        expect(commitCount(process.env.CI_PROJECT_DIR || process.env.PWD)).toBeGreaterThan(1);
     })
 })
 
 console.log("CWD: " + process.cwd());
 console.log("__dirname: " + __dirname);
 console.log("PWD: " + process.env.PWD);
-console.log("Commits: " + commitCount());
+console.log("Commits: " + commitCount(process.env.CI_PROJECT_DIR || process.env.PWD));
