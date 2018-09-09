@@ -1,6 +1,6 @@
 {
   "name": "project-check",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Simple Node.js test script to evaluate repository structure, code quality, etc.",
   "main": "index.js",
   "scripts": {
