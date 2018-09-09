@@ -61,6 +61,6 @@ HTML report:
 ![sample HTML report](docs/report_example.PNG)
 
 You can use environment variables to include your project's name in the test report (as shown in
-the picture and example CI job), use a different theme for the report or even to include a logo.
+the picture and example CI job), use a different theme for the report, or even to include a logo.
 See [here](https://github.com/Hargne/jest-html-reporter/wiki/configuration) for available
 configuration options.
