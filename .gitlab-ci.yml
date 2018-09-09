@@ -1,0 +1,65 @@
+stages:
+  # Add a new stage to the pipeline for code quality analysis
+  - code_analysis
+  - build
+
+lint:
+  # Run job during the "code_analysis" stage of the pipeline
+  stage: code_analysis
+
+  image: 
+    # Specify the Docker image to be used for the job, which in this case in a standard Node.js image
+    name: node:latest
+  script:
+    # Install dependencies as specified by package.json
+    - npm install --silent
+    # Run the "lint" script specified in package.json, executing eslint on the project root
+    - npm run lint
+
+project_check:
+  stage: code_analysis
+
+  image:
+    name: pmosbach/project-check:latest
+    entrypoint: [""]
+  variables:
+    JEST_HTML_REPORTER_PAGE_TITLE: "$CI_PROJECT_NAME Test Report"
+  script:
+    - jest --config /jest/jest.config.json /jest/
+  allow_failure: true
+  artifacts:
+    when: always
+    paths:
+      - "./test-report.html"
+
+retirejs:
+  # Run job during the "code_analysis" stage of the pipeline
+  stage: code_analysis
+
+  image: 
+    # Specify the Docker image to be used for the job, which in this case in a standard Node.js image
+    name: node:latest
+  script:
+    # Install dependencies as specified by package.json
+    - npm install --silent
+    # Installs the retire package to execute scan, and the tableify package to format HTML output
+    - npm install -g retire tableify
+    # Run retire with the following arguments:
+    # --path "./"                             Scans all files and folders within the working folder, which contains 
+    #                                         the repository files as well as any artifacts from prior jobs in the pipeline
+    # --outputformat json                     Output JSON file.
+    # --outputpath "./retirejs-report.json"   Specify output file location, otherwise no file is saved.
+    - retire --path "./" --outputformat json --outputpath "./retirejs-report.json"
+  after_script: 
+    # Use tableify to create HTML-formatted equivalent of JSON file.  Executed in after_script since script execution is
+    # stopped if an error is reported (i.e. retire identifies any vulnerability).
+    - cat "./retirejs-report.json" | tableify --style > "./retirejs-report.html"
+  # Allow failure will report a failure, but continue execution of the pipeline
+  allow_failure: true
+  artifacts:
+    # Saving artifacts always forces them to be saved on failure as well as success
+    when: always
+    # Save the HTML and JSON formatted results as artifacts
+    paths:
+      - "./retirejs-report.json"
+      - "./retirejs-report.html"

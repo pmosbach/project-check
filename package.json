@@ -4,7 +4,8 @@
   "description": "Simple Node.js test script to evaluate repository structure, code quality, etc.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config jest.config.json"
+    "test": "jest --config jest.config.json",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
