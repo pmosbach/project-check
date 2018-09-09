@@ -36,7 +36,7 @@ describe('The Repo - README and dotfiles', () => {
 
 describe('The Repo - Directory Structure', () => {
     test('should have a documentation folder', () => {
-        expect(glob.sync("(doc/|docs/|Documents/|Documentation/)")).not.toHaveLength(0);
+        expect(glob.sync("@(doc|docs|Documents|Documentation)/")).not.toHaveLength(0);
     })
 
     /*test('should have a documentation folder that is not empty', () => {
